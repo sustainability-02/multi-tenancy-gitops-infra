@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: norootsquash
+  namespace: kube-system
   labels:
     tier: management
     app: norootsquash
@@ -35,6 +36,8 @@ spec:
             name: host-systemd
           - mountPath: /host/sys
             name: host-sys
+      imagePullSecrets:
+      - name: cpregistrysecret
       tolerations:
       - operator: Exists
       volumes:
